@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { SearchIcon } from "lucide-react";
 import type { Post } from "@/lib/types";
 import SearchResults from "@/components/SearchResults";
+import { useUser } from "@clerk/nextjs";
 
 export default function Search() {
   const [query, setQuery] = useState("");
@@ -13,6 +14,8 @@ export default function Search() {
   const [showResults, setShowResults] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+
+  const { user, isLoaded } = useUser();
 
   function handleSelect(postId: string) {
     setShowResults(false);
@@ -24,7 +27,7 @@ export default function Search() {
   useEffect(() => {
     const searchValue = query.trim();
 
-    if (!searchValue) {
+    if (!isLoaded || !user?.id || !searchValue) {
       // eslint-disable-next-line
       setResults([]);
       return;
@@ -61,7 +64,7 @@ export default function Search() {
       clearTimeout(timeout);
       controller.abort();
     };
-  }, [query]);
+  }, [query, isLoaded, user?.id]);
 
   useEffect(() => {
     if (!showResults) return;
@@ -88,7 +91,7 @@ export default function Search() {
   }, [showResults]);
 
   return (
-    <form className="flex-1">
+    <form className="flex-1" onSubmit={(e) => e.preventDefault()}>
       <div ref={searchRef} className="relative w-full max-w-96">
         <label className="flex h-9 flex-1 cursor-text items-center justify-center rounded-full border border-gray-400 bg-gray-50 p-2.5 font-normal transition focus-within:bg-gray-100 focus-within:outline-2 focus-within:outline-gray-500 hover:bg-gray-100">
           <SearchIcon className="h-4 w-4 stroke-3 text-gray-600" />
