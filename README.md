@@ -4,7 +4,7 @@ A LinkedIn-inspired social networking app built with Next.js, MongoDB, Clerk, an
 
 ## Demo
 
-🔗 **Live Demo:** _Add your Vercel URL here_
+🔗 **Live Demo:** https://facebook-clone-as.vercel.app
 
 ## Features
 
