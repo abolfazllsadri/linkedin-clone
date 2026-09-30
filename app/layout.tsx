@@ -25,16 +25,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${inter.className} h-full scrollbar-thin antialiased`}
     >
-      <body className="flex min-h-screen flex-col bg-[#f4f2ed]">
+      <body className="flex min-h-screen min-w-0 flex-col overflow-x-clip bg-[#f4f2ed]">
         <ClerkProvider>
           <Toaster position="bottom-left" />
 
-          <header className="sticky top-0 z-50 w-full border-b border-b-gray-100 bg-white shadow-sm">
+          <div className="sticky top-0 z-50 w-full border-b border-b-gray-100 bg-white shadow-sm">
             <Header />
-          </header>
+          </div>
 
-          <div className="mx-auto w-full max-w-6xl flex-1">
-            <main>{children}</main>
+          <div className="mx-auto flex w-full max-w-6xl min-w-0 flex-1">
+            <main className="w-full min-w-0">{children}</main>
           </div>
         </ClerkProvider>
       </body>

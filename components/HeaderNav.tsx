@@ -23,7 +23,7 @@ export default function HeaderNav() {
       >
         <HomeIcon
           className={cn(
-            "h-5 w-5 stroke-black/70",
+            "h-4 w-4 stroke-black/70 sm:h-5 sm:w-5",
             pathname === "/" ? "fill-black" : "fill-transparent",
           )}
         />
@@ -41,7 +41,7 @@ export default function HeaderNav() {
       >
         <UsersIcon
           className={cn(
-            "h-5 w-5 stroke-black/70",
+            "h-4 w-4 stroke-black/70 sm:h-5 sm:w-5",
             pathname === "/mynetwork" ? "fill-black" : "fill-transparent",
           )}
         />
@@ -59,7 +59,7 @@ export default function HeaderNav() {
       >
         <Briefcase
           className={cn(
-            "h-5 w-5 stroke-black/70",
+            "h-4 w-4 stroke-black/70 sm:h-5 sm:w-5",
             pathname === "/jobs" ? "fill-black" : "fill-transparent",
           )}
         />
@@ -77,7 +77,7 @@ export default function HeaderNav() {
       >
         <MessageSquare
           className={cn(
-            "h-5 w-5 stroke-black/70",
+            "h-4 w-4 stroke-black/70 sm:h-5 sm:w-5",
             pathname === "/messaging" ? "fill-black" : "fill-transparent",
           )}
         />
@@ -94,7 +94,7 @@ export default function HeaderNav() {
 
       <Show when="signed-out">
         <SignInButton>
-          <Button>Sign in</Button>
+          <Button className="ml-1 text-xs sm:text-sm">Sign in</Button>
         </SignInButton>
       </Show>
     </ul>

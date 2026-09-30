@@ -6,7 +6,7 @@
 
 @layer components {
   .nav-link {
-    @apply flex flex-col items-center justify-center px-3.5 pb-0.5 text-sm font-normal transition after:absolute after:top-full after:bottom-0 after:left-0 after:h-[2.5px] after:w-full after:origin-center after:rounded-full after:bg-black after:transition-transform after:duration-200 after:content-[""] hover:text-black;
+    @apply flex flex-col items-center justify-center px-3 pb-0.5 text-sm font-normal transition after:absolute after:top-full after:bottom-0 after:left-0 after:h-[2.5px] after:w-full after:origin-center after:rounded-full after:bg-black after:transition-transform after:duration-200 after:content-[""] hover:text-black sm:px-3.5;
   }
 
   .nav-link svg {

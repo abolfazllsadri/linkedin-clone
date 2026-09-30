@@ -12,6 +12,7 @@ export default function Search() {
   const [results, setResults] = useState<Post[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [showResults, setShowResults] = useState(false);
+
   const searchRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
@@ -25,11 +26,20 @@ export default function Search() {
   }
 
   useEffect(() => {
+    if (!isLoaded) return;
+
     const searchValue = query.trim();
 
-    if (!isLoaded || !user?.id || !searchValue) {
+    if (!searchValue) {
       // eslint-disable-next-line
       setResults([]);
+      setIsSearching(false);
+      return;
+    }
+
+    if (!user) {
+      setResults([]);
+      setIsSearching(false);
       return;
     }
 
@@ -48,7 +58,7 @@ export default function Search() {
 
         const data = await response.json();
 
-        setResults(data);
+        setResults(data ?? []);
       } catch (error) {
         if (error instanceof DOMException && error.name === "AbortError")
           return;
@@ -64,7 +74,7 @@ export default function Search() {
       clearTimeout(timeout);
       controller.abort();
     };
-  }, [query, isLoaded, user?.id]);
+  }, [query, isLoaded, user]);
 
   useEffect(() => {
     if (!showResults) return;
@@ -91,8 +101,8 @@ export default function Search() {
   }, [showResults]);
 
   return (
-    <form className="flex-1" onSubmit={(e) => e.preventDefault()}>
-      <div ref={searchRef} className="relative w-full max-w-96">
+    <form className="w-full" onSubmit={(e) => e.preventDefault()}>
+      <div ref={searchRef} className="relative w-full sm:max-w-60">
         <label className="flex h-9 flex-1 cursor-text items-center justify-center rounded-full border border-gray-400 bg-gray-50 p-2.5 font-normal transition focus-within:bg-gray-100 focus-within:outline-2 focus-within:outline-gray-500 hover:bg-gray-100">
           <SearchIcon className="h-4 w-4 stroke-3 text-gray-600" />
 
@@ -101,8 +111,11 @@ export default function Search() {
             placeholder="Search"
             aria-label="Search"
             value={query}
-            className="flex-1 bg-transparent pl-2.5 text-[15px] outline-none"
-            onChange={(e) => setQuery(e.target.value)}
+            className="w-full flex-1 bg-transparent pl-2.5 text-[15px] outline-none"
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setShowResults(true);
+            }}
             onFocus={() => {
               if (query.trim()) setShowResults(true);
             }}
@@ -114,6 +127,7 @@ export default function Search() {
             results={results}
             onSelect={handleSelect}
             isSearching={isSearching}
+            user={user}
           />
         )}
       </div>

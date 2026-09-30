@@ -1,27 +1,21 @@
-import HeaderNav from "@/components/HeaderNav";
+import Logo from "@/components/Logo";
 import Search from "@/components/Search";
-import Image from "next/image";
-import Link from "next/link";
+import HeaderNav from "@/components/HeaderNav";
 
 export default function Header() {
   return (
-    <div className="pb.2.5 mx-auto flex min-h-14 w-full max-w-6xl items-center justify-between">
-      <div className="mx-2 flex items-center gap-2">
-        <Link href="/">
-          <Image
-            className="h-10 w-10 rounded-lg object-contain"
-            src="/logo.svg"
-            width={40}
-            height={40}
-            alt="Linkedin logo"
-            loading="eager"
-          />
-        </Link>
+    <header className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-3 gap-y-2 px-2 py-2 sm:min-h-14 sm:flex-nowrap">
+      <div className="order-1 shrink-0">
+        <Logo />
+      </div>
 
+      <div className="order-3 w-full sm:order-2 sm:w-60 sm:shrink-0">
         <Search />
       </div>
 
-      <HeaderNav />
-    </div>
+      <nav className="order-2 ml-auto shrink-0 sm:order-3">
+        <HeaderNav />
+      </nav>
+    </header>
   );
 }
