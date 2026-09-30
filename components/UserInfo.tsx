@@ -11,7 +11,7 @@ export default async function UserInfo({ posts }: { posts: Post[] }) {
   const firstName = user?.firstName ?? "";
   const lastName = user?.lastName ?? "";
   const fullName = `${firstName} ${lastName}`;
-  const email = user?.emailAddresses.at(0)?.emailAddress ?? "";
+  const email = user?.emailAddresses.at(0)?.emailAddress;
 
   const userPosts =
     posts?.filter((post) => post.user?.userId === user?.id) ?? [];
@@ -33,7 +33,9 @@ export default async function UserInfo({ posts }: { posts: Post[] }) {
           <a href={`mailto:${email}`} className="text-xs leading-none">
             {email}
           </a>
-          <p className="text-xs leading-none">@{user?.username ?? ""}</p>
+          {user?.username && (
+            <p className="text-xs leading-none">@{user.username}</p>
+          )}
         </div>
 
         <hr className="my-5 w-full border-gray-200" />
