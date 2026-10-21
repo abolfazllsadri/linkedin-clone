@@ -39,7 +39,7 @@ A LinkedIn-inspired social networking app built with Next.js, MongoDB, Clerk, an
 
 ### Home Page
 
-![Home Page (No Login)](./screenshots/home.png)
+![Home Page](./screenshots/home.png)
 
 ## Getting Started
 
