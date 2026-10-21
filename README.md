@@ -31,6 +31,16 @@ A LinkedIn-inspired social networking app built with Next.js, MongoDB, Clerk, an
 - Cloudinary
 - Sonner
 
+## 📸 Screenshots
+
+### Home Page (No Login)
+
+![Home Page (No Login)](./screenshots/home-not-auth.png)
+
+### Home Page
+
+![Home Page (No Login)](./screenshots/home.png)
+
 ## Getting Started
 
 ### 1. Install dependencies
