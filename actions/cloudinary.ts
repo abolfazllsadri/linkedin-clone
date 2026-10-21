@@ -12,8 +12,13 @@ export async function getCloudinarySignature(resourceType: "image" | "video") {
 
   const publicId = `linkedin-clone/users/${userId}/${crypto.randomUUID()}`;
 
+  const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!;
+
+  if (!uploadPreset)
+    throw new Error("Cloudinary upload preset is not configured");
+
   const signature = cloudinary.utils.api_sign_request(
-    { public_id: publicId, timestamp },
+    { public_id: publicId, timestamp, upload_preset: uploadPreset },
     process.env.CLOUDINARY_API_SECRET!,
   );
 
@@ -24,5 +29,6 @@ export async function getCloudinarySignature(resourceType: "image" | "video") {
     apiKey: process.env.CLOUDINARY_API_KEY!,
     cloudName: getCloudinaryCloudName(),
     resourceType,
+    uploadPreset,
   };
 }

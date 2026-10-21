@@ -8,9 +8,9 @@ import { Show } from "@clerk/nextjs";
 
 export const revalidate = 0;
 
-export default async function Home(props: PageProps<"/">) {
+export default async function HomePage({ searchParams }: PageProps<"/">) {
   let posts = await getAllPosts();
-  const { postId } = await props.searchParams;
+  const { postId } = await searchParams;
 
   if (postId) {
     const isPostExists = posts.some((post) => post._id === postId);

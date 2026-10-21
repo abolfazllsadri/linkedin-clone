@@ -25,9 +25,8 @@ export function validateMedia(file: File) {
 
 export async function uploadToCloudinary(file: File, type: "image" | "video") {
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-  const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
 
-  if (!cloudName || !uploadPreset)
+  if (!cloudName)
     throw new Error("Cloudinary environment variables are missing");
 
   const resourceType = type === "image" ? "image" : "video";
@@ -37,7 +36,7 @@ export async function uploadToCloudinary(file: File, type: "image" | "video") {
   const formData = new FormData();
 
   formData.append("file", file);
-  formData.append("upload_preset", uploadPreset);
+  formData.append("upload_preset", signature.uploadPreset);
   formData.append("api_key", signature.apiKey);
   formData.append("timestamp", String(signature.timestamp));
   formData.append("signature", signature.signature);

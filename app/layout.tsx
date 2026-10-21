@@ -26,7 +26,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${inter.className} h-full scrollbar-thin antialiased`}
     >
       <body className="flex min-h-screen min-w-0 flex-col overflow-x-clip bg-[#f4f2ed]">
-        <ClerkProvider>
+        <ClerkProvider telemetry={false}>
           <Toaster position="bottom-left" />
 
           <div className="sticky top-0 z-50 w-full border-b border-b-gray-100 bg-white shadow-sm">
